@@ -11,7 +11,7 @@ export interface GameCsvRow {
     description: string;
 }
 
-const CROWDFUNDING_BLURB = ' Support this game through our crowdfunding platform!';
+const CROWDFUNDING_BLURB = " Support this game through our crowdfunding platform!";
 
 /**
  * Minimal RFC-4180-style CSV parser supporting quoted fields, escaped quotes
@@ -19,7 +19,7 @@ const CROWDFUNDING_BLURB = ' Support this game through our crowdfunding platform
  */
 export function parseCsv(content: string): Record<string, string>[] {
     const records: string[][] = [];
-    let field = '';
+    let field = "";
     let record: string[] = [];
     let inQuotes = false;
 
@@ -42,16 +42,16 @@ export function parseCsv(content: string): Record<string, string>[] {
 
         if (char === '"') {
             inQuotes = true;
-        } else if (char === ',') {
+        } else if (char === ",") {
             record.push(field);
-            field = '';
-        } else if (char === '\n' || char === '\r') {
+            field = "";
+        } else if (char === "\n" || char === "\r") {
             // Handle CRLF by skipping the paired \n.
-            if (char === '\r' && content[i + 1] === '\n') {
+            if (char === "\r" && content[i + 1] === "\n") {
                 i++;
             }
             record.push(field);
-            field = '';
+            field = "";
             if (record.some((value) => value.length > 0) || record.length > 1) {
                 records.push(record);
             }
@@ -77,7 +77,7 @@ export function parseCsv(content: string): Record<string, string>[] {
     return rows.map((row) => {
         const entry: Record<string, string> = {};
         header.forEach((key, index) => {
-            entry[key] = row[index] ?? '';
+            entry[key] = row[index] ?? "";
         });
         return entry;
     });
@@ -86,7 +86,7 @@ export function parseCsv(content: string): Record<string, string>[] {
 /** Parse the games seed CSV into typed rows. */
 export function parseGamesCsv(content: string): GameCsvRow[] {
     return parseCsv(content)
-        .filter((row) => (row.Title ?? '').trim().length > 0)
+        .filter((row) => (row.Title ?? "").trim().length > 0)
         .map((row) => ({
             title: row.Title.trim(),
             category: row.Category.trim(),

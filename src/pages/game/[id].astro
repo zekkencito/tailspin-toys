@@ -1,14 +1,14 @@
 ---
-import type { GetStaticPaths } from 'astro';
-import Layout from '../../layouts/Layout.astro';
-import StarRating from '../../components/StarRating.astro';
-import Tag from '../../components/Tag.astro';
-import Card from '../../components/Card.astro';
-import Button from '../../components/Button.astro';
-import ArrowLeft from '../../assets/icons/arrow-left.svg';
-import Heart from '../../assets/icons/heart.svg';
-import { getDatabase } from '../../lib/db';
-import { getAllGameIds, getGameById } from '../../lib/games';
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import StarRating from "../../components/StarRating.astro";
+import Tag from "../../components/Tag.astro";
+import Card from "../../components/Card.astro";
+import Button from "../../components/Button.astro";
+import ArrowLeft from "../../assets/icons/arrow-left.svg";
+import Heart from "../../assets/icons/heart.svg";
+import { getDatabase } from "../../lib/db";
+import { getAllGameIds, getGameById } from "../../lib/games";
 
 export const prerender = true;
 
@@ -21,7 +21,7 @@ const { id } = Astro.params;
 const game = await getGameById(getDatabase(), Number(id));
 
 if (!game) {
-    return Astro.redirect('/404');
+    return Astro.redirect("/404");
 }
 ---
 

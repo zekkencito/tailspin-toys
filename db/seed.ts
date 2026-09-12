@@ -1,9 +1,9 @@
-import { readFileSync } from 'node:fs';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-import { dirname, join, resolve } from 'node:path';
-import { eq } from 'drizzle-orm';
-import { createDatabase, type Database } from '../src/lib/db';
-import { categories, games, publishers } from './schema';
+import { readFileSync } from "node:fs";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { dirname, join, resolve } from "node:path";
+import { eq } from "drizzle-orm";
+import { createDatabase, type Database } from "../src/lib/db";
+import { categories, games, publishers } from "./schema";
 import {
     categoryDescription,
     gameDescription,
@@ -12,7 +12,7 @@ import {
     ratingFromTitle,
     uniqueCategories,
     uniquePublishers,
-} from './transforms';
+} from "./transforms";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -51,8 +51,8 @@ async function upsertPublishers(db: Database, names: string[]): Promise<Map<stri
 }
 
 /** Seed the database from the games CSV. Idempotent: skips existing games by title. */
-export async function seedDatabase(db: Database, csvPath: string = join(here, 'games.csv')): Promise<void> {
-    const rows = parseGamesCsv(readFileSync(csvPath, 'utf-8'));
+export async function seedDatabase(db: Database, csvPath: string = join(here, "games.csv")): Promise<void> {
+    const rows = parseGamesCsv(readFileSync(csvPath, "utf-8"));
 
     const categoryIds = await upsertCategories(db, uniqueCategories(rows));
     const publisherIds = await upsertPublishers(db, uniquePublishers(rows));
@@ -79,11 +79,11 @@ if (import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
     const db = createDatabase();
     seedDatabase(db)
         .then(() => {
-            console.log('Database seeded.');
+            console.log("Database seeded.");
             process.exit(0);
         })
         .catch((error) => {
-            console.error('Seeding failed:', error);
+            console.error("Seeding failed:", error);
             process.exit(1);
         });
 }
