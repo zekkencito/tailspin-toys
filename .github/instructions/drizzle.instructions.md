@@ -51,6 +51,21 @@ export async function getAllGameIds(db: Database): Promise<number[]> {
 }
 ```
 
+- Every exported function in `db/` and `src/lib/` must have a TSDoc/JSDoc comment that states its purpose, documents every parameter (including the injectable `db` argument), and describes its return value.
+- Keep comments focused on the contract and the reason for a non-obvious choice; do not paraphrase the function body.
+- Update or remove API comments when implementation, types, or behavior changes.
+
+```ts
+/**
+ * Returns game IDs in stable title order for static route generation.
+ * @param db Injectable database used by the caller or its tests.
+ * @returns Game IDs sorted alphabetically by title.
+ */
+export async function getAllGameIds(db: Database): Promise<number[]> {
+  // ...
+}
+```
+
 - Always `order by` a stable column (title) so static builds are deterministic.
 - Map raw rows to the app-facing `Game`/`Publisher`/`Category` types in one place; don't leak Drizzle row shapes into components.
 - Keep ordering/lookup logic in `games.ts`, not in pages.

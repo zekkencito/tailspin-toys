@@ -106,10 +106,30 @@ const game = await getGameById(getDatabase(), Number(id));
 
 There is no Svelte/React layer. When a page genuinely needs client behaviour, add a scoped Astro `<script>` using standard DOM APIs. Prefer native interactive elements (`<button>`, `<a href>`) so keyboard and focus behaviour come for free.
 
+## Component contracts and documentation
+
+- Define a `Props` interface in every reusable component and document the component's purpose.
+- Keep the interface close to the frontmatter that consumes it.
+- Describe non-obvious props with TSDoc comments; the prop name and type are sufficient for obvious values.
+- Comments should explain intent or an accessibility/design decision, not restate the markup.
+- Keep comments current when the component contract or markup changes.
+
+```astro
+---
+/** Displays a game summary with its current funding status. */
+interface Props {
+  /** Game data used to populate the card. */
+  game: Game;
+  /** Whether to show the publisher metadata row. */
+  showPublisher?: boolean;
+}
+---
+```
+
 ## TypeScript
 
 - Use TypeScript for type-safe props
-- Define `Props` interface in frontmatter
+- Define and document the `Props` interface in frontmatter for reusable components
 - Type component imports and helper return values
 - Run `npx astro sync` to (re)generate route/content types before linting or type-checking
 - `.astro` files are type-checked by `npm run typecheck:astro` (which runs `astro sync` then `astro check`), on the classic `typescript` package. The pure TypeScript in `db/`, `src/lib/`, and `src/types/` is type-checked separately by `npm run typecheck` (the native TS 7 compiler, `tsgo`), which does **not** process `.astro` files.

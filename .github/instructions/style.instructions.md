@@ -46,6 +46,13 @@ ALL UI components MUST use dark theme colors:
 - Use semantic grouping: layout, spacing, colors, typography
 - Keep utility combinations readable and maintainable
 
+## Comments and TypeScript formatting
+
+- Comments in Astro and CSS should explain intent, constraints, or a non-obvious design decision; do not restate utility classes or markup.
+- Keep comments current with the styles they describe, and remove them when the reason no longer applies.
+- Use explicit TypeScript types for component props and exported values.
+- Follow the repository ESLint rules for double quotes, semicolons, equality checks, multiline trailing commas, and object spacing.
+
 ## Modern UI Patterns
 
 - Rounded corners: `rounded-lg`, `rounded-xl`, `rounded-2xl`
