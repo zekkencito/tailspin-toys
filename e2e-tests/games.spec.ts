@@ -24,6 +24,30 @@ test.describe('Game Listing and Navigation', () => {
     });
   });
 
+  test('should combine category and publisher filters', async ({ page }) => {
+    await test.step('Navigate to homepage', async () => {
+      await page.goto('/');
+      await expect(page.getByTestId('games-grid')).toBeVisible();
+    });
+
+    await test.step('Select a category and publisher', async () => {
+      await page.getByTestId('category-filter-1').check();
+      await page.getByTestId('publisher-filter').selectOption({ label: 'CodeForge Studios' });
+      await page.getByTestId('apply-filters').click();
+    });
+
+    await test.step('Verify the combined filter result', async () => {
+      await expect(page).toHaveURL(/category=Strategy&publisher=CodeForge(?:%20|\+)Studios/);
+      await expect(page.getByTestId('games-grid')).toBeVisible();
+      const visibleCards = page.locator('[data-testid="game-card"]:not([hidden])');
+      await expect(visibleCards).toHaveCount(1);
+      await expect(visibleCards.getByTestId('game-title')).toHaveText('DevOps Dominion');
+      await expect(page.getByTestId('filter-summary')).toHaveText(
+        'Showing 1 game matching your filters.',
+      );
+    });
+  });
+
   test('should navigate to correct game details page when clicking on a game', async ({ page }) => {
     let gameId: string | null;
     let gameTitle: string | null;
