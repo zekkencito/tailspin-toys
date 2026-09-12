@@ -27,6 +27,13 @@ export default [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      // Keep the TypeScript formatting baseline consistent without a formatter dependency.
+      curly: ["error", "multi-line"],
+      eqeqeq: ["error", "always"],
+      semi: ["error", "always"],
+      quotes: ["error", "double", { avoidEscape: true }],
+      "comma-dangle": ["error", "always-multiline"],
+      "object-curly-spacing": ["error", "always"],
     },
   },
 
