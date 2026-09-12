@@ -1,8 +1,8 @@
-import { and, asc, eq, inArray } from 'drizzle-orm';
-import type { SQL } from 'drizzle-orm';
-import type { Database } from './db';
-import { games, categories, publishers } from '../../db/schema';
-import type { Category, Game, Publisher } from '../types/game';
+import { and, asc, eq, inArray } from "drizzle-orm";
+import type { SQL } from "drizzle-orm";
+import type { Database } from "./db";
+import { games, categories, publishers } from "../../db/schema";
+import type { Category, Game, Publisher } from "../types/game";
 
 const gameSelection = {
     id: games.id,

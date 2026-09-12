@@ -1,5 +1,5 @@
 ---
-import Menu from '../assets/icons/menu.svg';
+import Menu from "../assets/icons/menu.svg";
 ---
 
 <header class="bg-blue-500 dark:bg-blue-700 text-white p-4 shadow-md transition-colors duration-300">
@@ -23,35 +23,35 @@ import Menu from '../assets/icons/menu.svg';
 
 <script>
   // Toggle menu visibility when hamburger is clicked
-  const menuToggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('menu');
+  const menuToggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
   
   if (menuToggle && menu) {
-    menuToggle.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-      const isExpanded = !menu.classList.contains('hidden');
-      menuToggle.setAttribute('aria-expanded', String(isExpanded));
+    menuToggle.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      const isExpanded = !menu.classList.contains("hidden");
+      menuToggle.setAttribute("aria-expanded", String(isExpanded));
       if (isExpanded) {
-        const firstLink = menu.querySelector('a');
+        const firstLink = menu.querySelector("a");
         if (firstLink) firstLink.focus();
       }
     });
     
     // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
+    document.addEventListener("click", (event) => {
       const target = event.target;
       const isClickInside = target instanceof Node && (menuToggle.contains(target) || menu.contains(target));
-      if (!isClickInside && !menu.classList.contains('hidden')) {
-        menu.classList.add('hidden');
-        menuToggle.setAttribute('aria-expanded', 'false');
+      if (!isClickInside && !menu.classList.contains("hidden")) {
+        menu.classList.add("hidden");
+        menuToggle.setAttribute("aria-expanded", "false");
       }
     });
 
     // Close menu with Escape key and return focus to toggle button
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !menu.classList.contains('hidden')) {
-        menu.classList.add('hidden');
-        menuToggle.setAttribute('aria-expanded', 'false');
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !menu.classList.contains("hidden")) {
+        menu.classList.add("hidden");
+        menuToggle.setAttribute("aria-expanded", "false");
         menuToggle.focus();
       }
     });

@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import GameCard from '../components/GameCard.astro';
-import PageHero from '../components/PageHero.astro';
-import EmptyState from '../components/EmptyState.astro';
-import { getDatabase } from '../lib/db';
-import { getAllCategories, getAllPublishers, getFilteredGames } from '../lib/games';
+import Layout from "../layouts/Layout.astro";
+import GameCard from "../components/GameCard.astro";
+import PageHero from "../components/PageHero.astro";
+import EmptyState from "../components/EmptyState.astro";
+import { getDatabase } from "../lib/db";
+import { getAllCategories, getAllPublishers, getFilteredGames } from "../lib/games";
 
 export const prerender = true;
 
@@ -35,8 +35,13 @@ const games = await getFilteredGames(db);
             <legend class="mb-3 text-sm font-semibold text-slate-100">Filter games</legend>
             <div class="flex flex-col gap-4 sm:flex-row sm:items-end">
               <div>
-                <span class="mb-2 block text-sm text-slate-300">Categories</span>
-                <div class="flex flex-wrap gap-3" data-testid="category-filters">
+                <span id="category-filter-label" class="mb-2 block text-sm text-slate-300">Categories</span>
+                <div
+                  class="flex flex-wrap gap-3"
+                  data-testid="category-filters"
+                  role="group"
+                  aria-labelledby="category-filter-label"
+                >
                   {categories.map((category) => (
                     <label class="flex items-center gap-2 text-sm text-slate-300">
                       <input
